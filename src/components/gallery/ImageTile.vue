@@ -7,11 +7,12 @@
 <script>
     export default {
         props: {
-            img: {
+            image: {
                 type: Object,
                 default: () => {
                     return {
-                        id: ''
+                        id: '',
+                        cropped_picture: ''
                     }
                 }
             }
@@ -23,7 +24,7 @@
         },
         computed: {
             link() {
-                const imgId = this.img.id;
+                const imgId = this.image.id;
 
                 return imgId
                     ? {
@@ -35,9 +36,11 @@
                     : {};
             },
             styles() {
-                return this.img.cropped_picture
+                const imgUrl = this.image.cropped_picture;
+
+                return imgUrl
                     ? {
-                        backgroundImage: `url(${encodeURI(this.img.cropped_picture)})`
+                        backgroundImage: `url(${encodeURI(imgUrl)})`
                     }
                     : {};
             }

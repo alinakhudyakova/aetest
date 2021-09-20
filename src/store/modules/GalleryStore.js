@@ -12,6 +12,7 @@ export default {
             return new Promise((resolve, reject) => {
                 api.getImages(state.page).then((data = {}) => {
                     commit('setImages', data.data.pictures);
+                    commit('setTotalPages', data.data.pageCount);
                     resolve(data);
                 }).catch((response) => {
                     reject(response);
@@ -25,6 +26,9 @@ export default {
                 ...state.images,
                 ...data
             ];
+        },
+        setTotalPages(state, total) {
+            state.totalPages = total;
         },
         incrementPage(state) {
             state.page += 1;
